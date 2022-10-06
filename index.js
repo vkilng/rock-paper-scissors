@@ -8,18 +8,42 @@ function getComputerChoice() {
 function playRound(playerSelection,computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
+    let res = '';
     if(playerSelection == computerSelection) {
-        return '--DRAW--';
+        res='DRAW';
     }else if(playerSelection=='rock' && computerSelection=='scissors'){
-        return true;
+        res='Win';
     }else if(playerSelection=='paper' && computerSelection=='rock'){
-        return true;
+        res='Win';
     }else if(playerSelection=='scissors' && computerSelection=='paper') {
-        return true; 
-    }else {return false;};
+        res='Win'; 
+    }else {res='Defeat';};
+    return res;
 }
 
-let playerSelection = 'scissors';
-let computerSelection = getComputerChoice();
-console.log('Compter\'s choice: '+computerSelection);
-console.log(playRound(playerSelection,computerSelection));
+function game() {
+    let gamearray = [];
+    let PwinCounter = 0;
+    let CwinCounter = 0;
+    let player = '';
+    for(let i=0; i<=5; i++) {
+        let playerSelection = window.prompt('Your turn','rock/paper/scissors');
+        let computerSelection = getComputerChoice();
+        let res = playRound(playerSelection,computerSelection);
+        console.log('(Player\'s choice, Compter\'s choice): ('+playerSelection+','+computerSelection+')');
+        gamearray.push(res);
+        console.log('GameArray: '+gamearray);
+        if(res=='Win') {
+            PwinCounter++;
+        } else if(res=='Defeat') {CwinCounter++;};
+    };
+    if(PwinCounter==CwinCounter){
+        console.log('--DRAW--');
+    }else if(PwinCounter>CwinCounter) {
+        console.log('--> You Win');
+    }else {
+        console.log('--> You Lost');
+    }
+}
+
+window.onload = game();
