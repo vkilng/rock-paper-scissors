@@ -1,7 +1,25 @@
+let hand = ['rock','paper','scissors'];
 function getComputerChoice() {
-    let hand = ['rock','paper','scissors'];
     let res = 0;
     res = Math.floor(Math.random() * 3);
-    console.log(hand[res]);
+    return hand[res];
 }
-window.onload = getComputerChoice();
+
+function playRound(playerSelection,computerSelection) {
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
+    if(playerSelection == computerSelection) {
+        return '--DRAW--';
+    }else if(playerSelection=='rock' && computerSelection=='scissors'){
+        return true;
+    }else if(playerSelection=='paper' && computerSelection=='rock'){
+        return true;
+    }else if(playerSelection=='scissors' && computerSelection=='paper') {
+        return true; 
+    }else {return false;};
+}
+
+let playerSelection = 'scissors';
+let computerSelection = getComputerChoice();
+console.log('Compter\'s choice: '+computerSelection);
+console.log(playRound(playerSelection,computerSelection));
