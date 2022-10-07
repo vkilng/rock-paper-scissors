@@ -1,9 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <header>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="icon" type="image/x-icon" href="resources/rps-favicon.png">
+        <link rel="stylesheet" href="index.css">
         <title>R-P-S</title>
-    </header>
+    </head>
     <body>
+        <div id="game">
+            <div id="player">
+                <div style="background-image: url(resources/hand-rock.png);"
+                onclick="game('rock')">
+                    <span>Rock</span>
+                </div>
+                <div style="background-image: url(resources/hand-paper.png);"
+                onclick="game('paper')">
+                    <span>Paper</span>
+                </div>
+                <div style="background-image: url(resources/hand-scissors.png);"
+                onclick="game('scissors')">
+                    <span style="position: relative; left: 25px;">Scissors</span>
+                </div>
+            </div>
+            <div id="midsection">
+                <div id="final">Final Result</div>
+                <div id="scoreholder" style="margin-bottom: -100px;">
+                    <span style="margin-left: 10px;">Player</span>
+                    <span>Computer</span>
+                </div>
+                <div id="score">
+                    <span id="playerscore">0</span>
+                    <span id="computerscore">0</span>
+                </div>
+            </div>
+            <div id="computer"></div>
+        </div>
         <script src="index.js"></script>
     </body>
 </html>

@@ -6,44 +6,41 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection,computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
-    let res = '';
     if(playerSelection == computerSelection) {
-        res='DRAW';
+        return 'DRAW';
     }else if(playerSelection=='rock' && computerSelection=='scissors'){
-        res='Win';
+        return true;
     }else if(playerSelection=='paper' && computerSelection=='rock'){
-        res='Win';
+        return true;
     }else if(playerSelection=='scissors' && computerSelection=='paper') {
-        res='Win'; 
-    }else {res='Defeat';};
-    return res;
-}
-
-function game() {
-    let gamearray = [];
-    let PwinCounter = 0;
-    let CwinCounter = 0;
-    let player = '';
-    for(let i=0; i<=5; i++) {
-        let playerSelection = window.prompt('Your turn','rock/paper/scissors');
-        let computerSelection = getComputerChoice();
-        let res = playRound(playerSelection,computerSelection);
-        console.log('(Player\'s choice, Compter\'s choice): ('+playerSelection+','+computerSelection+')');
-        gamearray.push(res);
-        console.log('GameArray: '+gamearray);
-        if(res=='Win') {
-            PwinCounter++;
-        } else if(res=='Defeat') {CwinCounter++;};
-    };
-    if(PwinCounter==CwinCounter){
-        console.log('--DRAW--');
-    }else if(PwinCounter>CwinCounter) {
-        console.log('--> You Win');
+        return true; 
     }else {
-        console.log('--> You Lost');
-    }
+        return false;
+    };
 }
 
-window.onload = game();
+let score = {player:0,computer:0};
+
+function game(playerSelection) {
+    let computerSelection = getComputerChoice();
+    console.log(computerSelection);
+    let compelem = document.getElementById('computer');
+    if(computerSelection == 'rock'){
+        compelem.style.backgroundImage = "url(resources/hand-rock.png)";
+    } else if(computerSelection == 'paper'){
+        compelem.style.backgroundImage = "url(resources/hand-paper.png)";
+    } else if(computerSelection == 'scissors'){
+        compelem.style.backgroundImage = "url(resources/hand-scissors.png)";
+    };
+    const to = setTimeout(()=>{compelem.style.backgroundImage = null;},5000);
+    let res = playRound(playerSelection,computerSelection);
+    if(typeof res == "boolean") {
+        if(res) {
+            score.player=score.player+1;
+            document.getElementById('playerscore').innerText = score.player;
+        } else {
+            score.computer=score.computer+1;
+            document.getElementById('computerscore').innerText = score.computer;
+        };
+    };
+}
