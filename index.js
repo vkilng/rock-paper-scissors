@@ -32,7 +32,7 @@ function game(playerSelection) {
     } else if(computerSelection == 'scissors'){
         compelem.style.backgroundImage = "url(resources/hand-scissors.png)";
     };
-    const to = setTimeout(()=>{compelem.style.backgroundImage = null;},5000);
+    //const to = setTimeout(()=>{compelem.style.backgroundImage = null;},5000);
     let res = playRound(playerSelection,computerSelection);
     if(typeof res == "boolean") {
         if(res) {
@@ -43,4 +43,14 @@ function game(playerSelection) {
             document.getElementById('computerscore').innerText = score.computer;
         };
     };
+    let final = document.getElementById('final');
+    if(score.player == 5){
+        final.style.color = 'green';
+        final.innerText = 'You Won';
+        to = setTimeout(()=>{window.location.reload()},2000);
+    } else if(score.computer == 5){
+        final.style.color = 'red';
+        final.innerText = 'You Lost';
+        to = setTimeout(()=>{window.location.reload()},2000);
+    }
 }
