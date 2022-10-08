@@ -47,10 +47,12 @@ function game(playerSelection) {
     if(score.player == 5){
         final.style.color = 'green';
         final.innerText = 'You Won';
-        to = setTimeout(()=>{window.location.reload()},2000);
+        document.getElementById('player').style.pointerEvents = 'none';
+        to = setTimeout(()=>{window.location.reload()},3000);
     } else if(score.computer == 5){
         final.style.color = 'red';
         final.innerText = 'You Lost';
-        to = setTimeout(()=>{window.location.reload()},2000);
+        document.getElementById('player').style.pointerEvents = 'none';
+        to = setTimeout(()=>{window.location.reload()},3000);
     }
 }

@@ -20,12 +20,13 @@
 }
 #player span{
     position: relative; top: 110px; left: 30px;
+    user-select: none;
 }
 #midsection{
     width: 400px;
     display: inline-flex; flex-direction: column;
     align-items: center; justify-content: center;
-    gap: 150px;
+    gap: 150px; user-select: none;
 }
 #score,#scoreholder{
     display: flex; width: 100%;
@@ -38,6 +39,7 @@
     width: 100px; height: 100px;
     border: solid 5px black; border-radius: 50%;
     background-position: center; background-size: cover;
+    user-select: none;
 }
 #computer::after{
     content: "Computer";
