@@ -50,3 +50,8 @@
 #final{
     font-size: 35px;
 }
+
+#footer{
+    display: flex;
+    align-items: center; justify-content: center;
+}
