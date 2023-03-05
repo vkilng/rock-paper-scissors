@@ -1,74 +1,86 @@
-let score = {player:0, computer:0};
-let hand = ['rock','paper','scissors'];
-let compElem = document.getElementById('computer');
+const gameBoard = () => {
+  const hands = ["rock", "paper", "scissors"];
+  let score = {
+    player: 0,
+    computer: 0,
+    winnerOfRound: '',
+    winnerOfGame: '',
+  };
 
-function getComputerChoice() {
-    let result = 0;
-    result = Math.floor(Math.random() * 3);
-    return hand[result];
+  const getComputerChoice = () => {
+    return Math.floor(Math.random() * 3);
+  }
+
+  const playerWins = (playerSelection, computerSelection) => {
+    if (playerSelection === computerSelection) {
+      return 'DRAW';
+    } else if (playerSelection === 0 && computerSelection === 2) {
+      return true;
+    } else if (playerSelection === 1 && computerSelection === 0) {
+      return true;
+    } else if (playerSelection === 2 && computerSelection === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const playRound = (playerSelection) => {
+    playerSelection = hands.indexOf(playerSelection);
+
+    const computerSelection = getComputerChoice();
+    updateComputerPanel(computerSelection);
+
+    if (playerWins(playerSelection, computerSelection) === true) {
+      score.player++;
+      score.winnerOfRound = 'Player';
+    } else if (playerWins(playerSelection, computerSelection) === false) {
+      score.computer++;
+      score.winnerOfRound = 'Computer';
+    } else {
+      score.winnerOfRound = 'None - It was a DRAW';
+    }
+
+    updateScorePanel();
+
+    if (score.player === 5) {
+      score.winnerOfGame = 'Player';
+      declareWinnerOfGame();
+    } else if (score.computer === 5) {
+      score.winnerOfGame = 'Computer';
+      declareWinnerOfGame();
+    }
+  }
+
+  const updateComputerPanel = (computerSelection) => {
+    const handName = hands[computerSelection];
+    document.querySelector('.computer.panel .hand-name').textContent = `Computer plays ${handName.toUpperCase()}`;
+    document.querySelector('.computer.panel .hand').style.backgroundImage = `url(./resources/hand-${handName}.png)`;
+  }
+
+  const updateScorePanel = () => {
+    document.querySelector('.player.score').textContent = score.player;
+    document.querySelector('.computer.score').textContent = score.computer;
+    document.querySelector('.score.panel .winner').textContent = score.winnerOfRound;
+  }
+
+  const declareWinnerOfGame = () => {
+    document.querySelector('.declaration > div:first-of-type').textContent = 'Winner of Game';
+    document.querySelector('.declaration .winner').textContent = score.winnerOfGame;
+  }
+
+  return { score, playRound, declareWinnerOfGame };
 }
 
-function playRound(playerSelection,computerSelection) {
-    if(playerSelection === computerSelection) {
-        return 'DRAW';
-    }else if(playerSelection === 'rock' && computerSelection === 'scissors'){
-        return true;
-    }else if(playerSelection === 'paper' && computerSelection === 'rock'){
-        return true;
-    }else if(playerSelection === 'scissors' && computerSelection === 'paper') {
-        return true; 
-    }else {
-        return false;
-    };
-}
+const Game = (() => {
+  const board = gameBoard();
 
-function game(playerSelection) {
-    let computerSelection = getComputerChoice();
-    console.log(computerSelection);
-    transition();
-    let to = setTimeout(() => {
-        compElem.style.backgroundSize = 'cover';
-        compElem.style.backgroundPosition = 'center';
-        if(computerSelection  === 'rock'){
-            compElem.style.backgroundImage = "url(resources/hand-rock.png)";
-        } else if(computerSelection  === 'paper'){
-            compElem.style.backgroundImage = "url(resources/hand-paper.png)";
-        } else if(computerSelection  === 'scissors'){
-            compElem.style.backgroundImage = "url(resources/hand-scissors.png)";
-        };
-        let result = playRound(playerSelection,computerSelection);
-        if(typeof result  === "boolean") {
-            if(result) {
-                score.player = score.player+1;
-                document.getElementById('playerscore').innerText = score.player;
-            } else {
-                score.computer=score.computer+1;
-                document.getElementById('computerscore').innerText = score.computer;
-            };
-        };
-        let final = document.getElementById('final');
-        if(score.player === 5){
-            final.style.color = 'green';
-            final.innerText = 'You Won';
-            document.getElementById('player').style.pointerEvents = 'none';
-            to = setTimeout(()=>{window.location.reload()},3000);
-        } else if(score.computer === 5){
-            final.style.color = 'red';
-            final.innerText = 'You Lost';
-            document.getElementById('player').style.pointerEvents = 'none';
-            to = setTimeout(() => {window.location.reload()},3000);
-        }
-    },50);
-}
+  const playerPanel = document.querySelector('.player.panel');
+  playerPanel.addEventListener('click', (event) => {
+    if (board.score.winnerOfGame !== '') {
+      return;
+    }
+    board.playRound(event.target.classList[0]);
+  })
 
-function transition() {
-    compElem.style.background = 'linear-gradient(to right, black 50%, transparent 0)';
-    compElem.style.backgroundSize = '200% 100%'
-    const compElemEffects = {
-      backgroundPosition : ['right','left','right']
-    };
-    const compElemTiming = {
-      duration: 50,
-    };
-    compElem.animate(compElemEffects,compElemTiming);
-}
+})();

@@ -8,47 +8,62 @@
         <title>R-P-S</title>
     </head>
     <body>
-        <div id="game">
-            <div id="player">
-                <div style="background-image: url(resources/hand-rock.png);"
-                onclick="game('rock')">
-                    <span>Rock</span>
-                </div>
-                <div style="background-image: url(resources/hand-paper.png);"
-                onclick="game('paper')">
-                    <span>Paper</span>
-                </div>
-                <div style="background-image: url(resources/hand-scissors.png);"
-                onclick="game('scissors')">
-                    <span style="position: relative; left: 25px;">Scissors</span>
-                </div>
-            </div>
-
-            <div id="midsection">
-                <div id="final">-- Race to 5 --</div>
-                <div id="scoreboard">
-                    <div id="placard">
-                        <span>Player</span>
-                        <span>Computer</span>
-                    </div>
-                    <div id="score">
-                        <span id="playerscore"
-                            style="position: relative; right: 20px;">0</span>
-                        <span id="computerscore">0</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="computer"></div>
+        <div class="header">
+            <div>A game of Rock - Paper - Scissors</div>
+            <div>-- First to score 5 wins --</div>
         </div>
 
-        <br>
-        <p id="footer">
-            <a href="https://theodinproject.com">The Odin Project</a>&ensp;
-            <a href="https://github.com/vkilng/rock-paper-scissors" id="githubLogo">
-                <img src="resources/GitHub-Mark-32px.png" alt="GitHub">
+        <div class="computer panel">
+            <div>
+                <div class="hand"></div>
+                <div class="hand-name">Computer plays ___</div>
+            </div>
+        </div>
+        
+        <div class="score panel">
+            <div>
+                <div class="player-name">Player</div>
+                <div class="player score">0</div>
+            </div>
+            <div class="declaration">
+                <div>Winner of Round</div>
+                <div class="winner">-</div>
+            </div>
+            <div>
+                <div class="player-name">Computer</div>
+                <div class="computer score">0</div>
+            </div>
+        </div>
+
+        <div class="player panel">
+            <div>
+                <button class="rock hand"
+                style="background-image: url(./resources/hand-rock.png);"></button>
+                <div class="hand-name">Rock</div>
+            </div>
+            <div>
+                <button class="paper hand"
+                style="background-image: url(./resources/hand-paper.png);"></button>
+                <div class="hand-name">Paper</div>
+            </div>
+            <div>
+                <button class="scissors hand"
+                style="background-image: url(./resources/hand-scissors.png);"></button>
+                <div class="hand-name">Scissors</div>
+            </div>
+        </div>
+
+        <footer>
+            A mini-project by
+            <a href="https://github.com/vkilng/rock-paper-scissors"> vkilng </a>
+            <a href="https://github.com/vkilng/rock-paper-scissors">
+              <img
+                src="resources/GitHub-Mark-Light-32px.png"
+                alt="GitHub Page"
+              />
             </a>
-        </p>
+            guided by <a href="https://www.theodinproject.com">The Odin Project</a>
+          </footer>
         <script src="script.js"></script>
     </body>
 </html>

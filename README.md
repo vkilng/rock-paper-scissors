@@ -1,6 +1,6 @@
 # rock-paper-scissors
 
-- [Live Demo](https://vkilng.github.io/rock-paper-scissors/)
+- [Live](https://vkilng.github.io/rock-paper-scissors/)
 
 - A simple implementation of grade-school classic “rock paper scissors”.
 
