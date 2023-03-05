@@ -69,9 +69,7 @@ footer {
   background-color: #27272a;
   color: white;
   padding: 1vw 4vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
   gap: 0.8vw;
   font-size: 0.8rem;
 }
